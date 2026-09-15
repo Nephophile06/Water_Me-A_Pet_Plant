@@ -21,8 +21,8 @@
                 speciesCatalog.add("Bonsai");
                 }
 
-                String sql = "SELECT plant_id, nickname, species_name, NVL(health_points, 20) AS health_points,
-                NVL(growth_stage, 1) AS growth_stage FROM user_plants WHERE user_id = ? ORDER BY plant_id ASC";
+                String sql = "SELECT plant_id, nickname, species_name, NVL(health_points, 20) AS health_points, " +
+                "NVL(growth_stage, 1) AS growth_stage FROM user_plants WHERE user_id = ? ORDER BY plant_id ASC";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setInt(1, currentUserId);
                 ResultSet rs = ps.executeQuery();
@@ -67,34 +67,186 @@
                     <link rel="preconnect" href="https://fonts.googleapis.com">
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                     <link
-                        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Quicksand:wght@600;700&display=swap"
+                        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Quicksand:wght@600;700;800&display=swap"
                         rel="stylesheet">
                     <script src="https://cdn.tailwindcss.com"></script>
                     <link rel="stylesheet" href="assets/css/style.css">
+                    <style>
+                        .sky-container {
+                            position: fixed;
+                            inset: 0;
+                            overflow: hidden;
+                            pointer-events: none;
+                            z-index: 0;
+                        }
+
+                        .ambient-leaf {
+                            position: absolute;
+                            pointer-events: none;
+                            opacity: 0;
+                        }
+
+                        .puffy-cloud {
+                            filter: drop-shadow(0 4px 12px rgba(160, 195, 215, 0.28));
+                        }
+                    </style>
                 </head>
 
-                <body class="min-h-screen p-4 sm:p-8 flex items-center justify-center bg-[#FAF7F2] text-[#2D3E33]">
+                <body
+                    class="nature-sky-bg min-h-screen p-4 sm:p-8 flex items-center justify-center relative select-none overflow-x-hidden">
 
+                    <!-- Ambient Nature Background Sky Layer -->
+                    <div class="sky-container">
+                        <!-- Glowing Warm Sun Orb -->
+                        <div class="sun-glow-orb"></div>
+
+                        <!-- Scattered Puffy Cartoon Clouds -->
+                        <!-- Cloud 1 (Top Left) -->
+                        <div class="absolute top-[6%] left-[4%] sm:left-[8%] cloud-drift-left-1 puffy-cloud">
+                            <svg width="180" height="95" viewBox="0 0 200 110" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M45 100 C20 100 5 82 5 60 C5 40 20 25 40 24 C50 8 72 0 95 0 C120 0 140 10 150 28 C160 22 175 24 185 34 C195 44 195 60 190 72 C198 80 198 92 190 100 Z"
+                                    fill="#FFFFFF" />
+                            </svg>
+                        </div>
+
+                        <!-- Cloud 2 (Top Right) -->
+                        <div class="absolute top-[10%] right-[6%] sm:right-[10%] cloud-drift-right-1 puffy-cloud">
+                            <svg width="160" height="85" viewBox="0 0 200 110" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M45 100 C20 100 5 82 5 60 C5 40 20 25 40 24 C50 8 72 0 95 0 C120 0 140 10 150 28 C160 22 175 24 185 34 C195 44 195 60 190 72 C198 80 198 92 190 100 Z"
+                                    fill="#FFFFFF" />
+                            </svg>
+                        </div>
+
+                        <!-- Cloud 3 (Mid Left) -->
+                        <div
+                            class="absolute top-[48%] left-[2%] sm:left-[5%] cloud-drift-left-2 puffy-cloud opacity-95">
+                            <svg width="140" height="75" viewBox="0 0 200 110" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M45 100 C20 100 5 82 5 60 C5 40 20 25 40 24 C50 8 72 0 95 0 C120 0 140 10 150 28 C160 22 175 24 185 34 C195 44 195 60 190 72 C198 80 198 92 190 100 Z"
+                                    fill="#FFFFFF" />
+                            </svg>
+                        </div>
+
+                        <!-- Cloud 4 (Mid Right) -->
+                        <div
+                            class="absolute top-[55%] right-[3%] sm:right-[6%] cloud-drift-right-2 puffy-cloud opacity-90">
+                            <svg width="150" height="80" viewBox="0 0 200 110" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M45 100 C20 100 5 82 5 60 C5 40 20 25 40 24 C50 8 72 0 95 0 C120 0 140 10 150 28 C160 22 175 24 185 34 C195 44 195 60 190 72 C198 80 198 92 190 100 Z"
+                                    fill="#FFFFFF" />
+                            </svg>
+                        </div>
+
+                        <!-- Cloud 5 (Bottom Left) -->
+                        <div
+                            class="absolute bottom-[4%] left-[6%] sm:left-[12%] cloud-drift-bot-1 puffy-cloud opacity-95">
+                            <svg width="170" height="90" viewBox="0 0 200 110" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M45 100 C20 100 5 82 5 60 C5 40 20 25 40 24 C50 8 72 0 95 0 C120 0 140 10 150 28 C160 22 175 24 185 34 C195 44 195 60 190 72 C198 80 198 92 190 100 Z"
+                                    fill="#FFFFFF" />
+                            </svg>
+                        </div>
+
+                        <!-- Soaring Stylized Birds -->
+                        <div class="absolute bird-soar-1 top-[14%] left-0">
+                            <svg width="44" height="26" viewBox="0 0 60 36" fill="none"
+                                class="text-[#325842] wing-flap">
+                                <path
+                                    d="M30 18 C26 12 16 4 2 2 C8 10 18 16 26 22 L24 34 L30 26 L36 34 L34 22 C42 16 52 10 58 2 C44 4 34 12 30 18 Z"
+                                    fill="currentColor" />
+                                <circle cx="30" cy="15" r="2.2" fill="currentColor" />
+                            </svg>
+                        </div>
+
+                        <div class="absolute bird-soar-2 top-[30%] left-0">
+                            <svg width="34" height="20" viewBox="0 0 60 36" fill="none"
+                                class="text-[#48725A] wing-flap">
+                                <path
+                                    d="M30 18 C26 12 16 4 2 2 C8 10 18 16 26 22 L24 34 L30 26 L36 34 L34 22 C42 16 52 10 58 2 C44 4 34 12 30 18 Z"
+                                    fill="currentColor" />
+                                <circle cx="30" cy="15" r="2" fill="currentColor" />
+                            </svg>
+                        </div>
+
+                        <!-- Floating Ambient Leaves -->
+                        <div class="ambient-leaf leaf-drift-1 top-4 left-[12%]">
+                            <svg width="42" height="42" viewBox="0 0 36 36" fill="none"
+                                class="text-[#2EB867] drop-shadow-sm">
+                                <path
+                                    d="M18 3 C10 8 4 16 4 24 C4 28.5 7.5 32 13 32 C21 32 30 24 32 12 C32 5 25 3 18 3 Z"
+                                    fill="currentColor" />
+                                <path d="M7 28 C13 22 19 15 28 8" stroke="#FFFFFF" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </div>
+
+                        <div class="ambient-leaf leaf-drift-2 top-10 right-[15%]">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
+                                class="text-[#10B981] drop-shadow-sm">
+                                <path
+                                    d="M18 3 C10 8 4 16 4 24 C4 28.5 7.5 32 13 32 C21 32 30 24 32 12 C32 5 25 3 18 3 Z"
+                                    fill="currentColor" />
+                                <path d="M7 28 C13 22 19 15 28 8" stroke="#E6F9F0" stroke-width="1.6"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </div>
+
+                        <div class="ambient-leaf leaf-drift-3 top-2 left-[45%]">
+                            <svg width="34" height="34" viewBox="0 0 36 36" fill="none"
+                                class="text-[#84CC16] drop-shadow-sm">
+                                <path
+                                    d="M18 3 C10 8 4 16 4 24 C4 28.5 7.5 32 13 32 C21 32 30 24 32 12 C32 5 25 3 18 3 Z"
+                                    fill="currentColor" />
+                                <path d="M7 28 C13 22 19 15 28 8" stroke="#FFFFFF" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </div>
+
+                        <!-- Ambient Shimmer / Sparkle Pollen particles -->
+                        <div class="ambient-sparkle w-2 h-2 top-[20%] left-[25%]" style="animation-delay: 1s;"></div>
+                        <div class="ambient-sparkle w-2.5 h-2.5 top-[35%] right-[22%]" style="animation-delay: 3s;">
+                        </div>
+                        <div class="ambient-sparkle w-1.5 h-1.5 bottom-[25%] left-[18%]" style="animation-delay: 4.5s;">
+                        </div>
+                    </div>
+
+                    <!-- Main Habitat Dashboard Container -->
                     <main
-                        class="clay-card w-full max-w-5xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 relative overflow-hidden">
+                        class="clay-card w-full max-w-5xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 relative overflow-hidden z-20 shadow-2xl">
                         <!-- Top Navigation Bar -->
-                        <header class="lg:col-span-12 flex items-center justify-between pb-6 border-b border-[#EFEBE4]">
-                            <div class="flex items-center gap-3">
+                        <header class="lg:col-span-12 flex items-center justify-between pb-6 border-b border-[#EAEFEA]">
+                            <div class="flex items-center gap-3.5">
                                 <div
-                                    class="w-10 h-10 rounded-2xl bg-[#E8F5EC] flex items-center justify-center text-xl shadow-inner">
-                                    🌱</div>
+                                    class="w-11 h-11 rounded-2xl bg-gradient-to-b from-[#EBF8F0] to-[#D2EFE0] flex items-center justify-center text-xl shadow-inner border border-white gentle-bounce">
+                                    🌱
+                                </div>
                                 <div>
-                                    <h1 class="text-xl font-bold font-['Quicksand'] text-[#1F3325]">Water Me - A Pet
-                                        Plant</h1>
-                                    <p class="text-[11px] text-[#768C7E] font-semibold">Gardener: <span
-                                            class="text-[#2F7E4E] font-bold">
-                                            <%= currentUsername %>
-                                        </span></p>
+                                    <h1
+                                        class="text-xl sm:text-2xl font-bold font-['Quicksand'] text-[#163824] tracking-tight">
+                                        Water Me - A Pet Plant</h1>
+                                    <div class="flex items-center gap-2 mt-0.5">
+                                        <p class="text-[11px] text-[#60806E] font-semibold">Gardener: <span
+                                                class="text-[#2F7E4E] font-bold">
+                                                <%= currentUsername %>
+                                            </span></p>
+                                        <span
+                                            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EBF8F0] text-[#247E49] text-[10px] font-extrabold border border-[#D0EFE0]">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse"></span>
+                                            Active Habitat
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3">
                                 <button onclick="openModal('addModal')"
-                                    class="clay-button px-4 py-2.5 bg-[#4E9F6E] hover:bg-[#438C5F] text-white rounded-2xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm">
+                                    class="clay-button px-4 py-2.5 bg-[#36925B] hover:bg-[#2B7A4B] text-white rounded-2xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                             d="M12 4v16m8-8H4" />
@@ -115,32 +267,37 @@
                         <!-- Left Column: Plant Nursery List -->
                         <aside class="lg:col-span-4 flex flex-col justify-between space-y-4">
                             <div>
-                                <span
-                                    class="text-[11px] font-extrabold uppercase tracking-wider text-[#799081] block mb-3">Your
-                                    Botanical Sanctuary</span>
-                                <div class="space-y-3 max-h-[420px] overflow-y-auto pr-1" id="plantListContainer"></div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span
+                                        class="text-[11px] font-extrabold uppercase tracking-wider text-[#638472] block">Your
+                                        Botanical Sanctuary</span>
+                                </div>
+                                <div class="space-y-3 max-h-[420px] overflow-y-auto pr-1.5" id="plantListContainer">
+                                </div>
                             </div>
                             <div
-                                class="p-4 rounded-2xl bg-[#F4F1EA]/70 border border-[#E9E4DC] flex items-center justify-between text-xs font-semibold text-[#5B7363]">
+                                class="p-4 rounded-2xl bg-[#F0F7F2]/80 border border-[#DCEEE3] flex items-center justify-between text-xs font-semibold text-[#486B57] shadow-xs">
                                 <span>Total Cultivated</span>
-                                <span class="px-2.5 py-0.5 rounded-full bg-white text-[#2F7E4E] shadow-sm font-bold">
-                                    <%= totalCount %>
+                                <span
+                                    class="px-3 py-0.5 rounded-full bg-white text-[#247E49] shadow-sm font-bold border border-[#E0EFE6]">
+                                    <%= totalCount %> Flora
                                 </span>
                             </div>
                         </aside>
 
                         <!-- Right Column: Interactive Terrarium Area -->
                         <section
-                            class="lg:col-span-8 flex flex-col justify-between bg-[#FDFCFA] rounded-3xl p-6 sm:p-8 border border-[#EFEAE2]">
-                            <div class="flex items-center justify-between">
+                            class="lg:col-span-8 flex flex-col justify-between bg-gradient-to-b from-[#FFFFFF] to-[#F8FCF9] rounded-3xl p-6 sm:p-8 border border-[#E3EFE7] shadow-inner relative overflow-hidden">
+                            <div class="flex items-center justify-between relative z-10">
                                 <div>
                                     <span id="activeSpeciesBadge"
-                                        class="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-[#EBF6EE] text-[#2F7E4E]">Species</span>
-                                    <div class="flex items-center gap-3 mt-1.5">
-                                        <h2 class="text-3xl font-bold font-['Quicksand'] text-[#1F3325]"
+                                        class="text-[10px] uppercase font-extrabold tracking-widest px-3 py-1 rounded-full bg-[#E8F7EE] text-[#247E49] border border-[#D0EFE0]">Species</span>
+                                    <div class="flex items-center gap-3 mt-2">
+                                        <h2 class="text-3xl font-bold font-['Quicksand'] text-[#163824]"
                                             id="activePlantName">Plant</h2>
                                         <button onclick="openEditModal()"
-                                            class="text-[#849E8D] hover:text-[#2F7E4E] transition" title="Rename Plant">
+                                            class="text-[#729A83] hover:text-[#247E49] transition p-1"
+                                            title="Rename Plant">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -159,9 +316,9 @@
                             </div>
 
                             <!-- 3D Terrarium Display Pedestal -->
-                            <div class="relative my-6 h-72 sm:h-80 flex items-center justify-center">
+                            <div class="relative my-6 h-72 sm:h-80 flex items-center justify-center z-10">
                                 <div
-                                    class="w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-gradient-to-b from-[#F3F9F5] via-[#E6F3EA] to-[#DAEDE1] border-4 border-white shadow-[inset_0_4px_16px_rgba(0,0,0,0.04),0_12px_30px_rgba(62,126,82,0.12)] flex items-center justify-center relative overflow-hidden">
+                                    class="w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-gradient-to-b from-[#F2FBF6] via-[#E4F5EB] to-[#D5EFE0] border-4 border-white shadow-[inset_0_6px_20px_rgba(46,125,79,0.08),0_16px_36px_rgba(54,146,91,0.16)] flex items-center justify-center relative overflow-hidden">
                                     <div id="windLayer"
                                         class="absolute inset-0 pointer-events-none flex flex-col justify-around py-12 px-6 opacity-0">
                                         <div
@@ -187,46 +344,46 @@
                                     <div id="plantVisualStage"
                                         class="plant-sway relative z-10 transition-all duration-500"></div>
                                     <div
-                                        class="absolute bottom-5 w-40 h-5 bg-gradient-to-r from-[#D98263] via-[#E29A80] to-[#CF7454] rounded-full shadow-md border-2 border-white/60">
+                                        class="absolute bottom-5 w-40 h-5 bg-gradient-to-r from-[#D98263] via-[#E29A80] to-[#CF7454] rounded-full shadow-md border-2 border-white/70">
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Health Meter -->
-                            <div class="space-y-2 mb-6">
-                                <div class="flex justify-between items-center text-xs font-bold text-[#556F5D]">
-                                    <span>Hydration & Freshness</span>
-                                    <span id="healthDisplay" class="text-[#2F7E4E] text-sm">0%</span>
+                            <div class="space-y-2 mb-6 z-10">
+                                <div class="flex justify-between items-center text-xs font-bold text-[#4B6F57]">
+                                    <span class="flex items-center gap-1.5">
+                                        <span class="text-sm">💧</span> Hydration & Vitality
+                                    </span>
+                                    <span id="healthDisplay" class="text-[#247E49] text-sm font-extrabold">0%</span>
                                 </div>
-                                <div class="w-full h-3.5 bg-[#EAE5DC] rounded-full p-0.5 overflow-hidden">
+                                <div class="w-full h-3.5 bg-[#E2EBE5] rounded-full p-0.5 overflow-hidden shadow-inner">
                                     <div id="healthBar"
-                                        class="h-full rounded-full bg-gradient-to-r from-[#83D19F] to-[#409B66] transition-all duration-500"
+                                        class="h-full rounded-full bg-gradient-to-r from-[#6EE7B7] via-[#34D399] to-[#059669] transition-all duration-500 shadow-xs"
                                         style="width: 0%;"></div>
                                 </div>
                             </div>
 
                             <!-- Care Actions -->
-                            <div id="careActionsContainer" class="grid grid-cols-2 gap-4">
+                            <div id="careActionsContainer" class="grid grid-cols-2 gap-4 z-10">
                                 <button onclick="applyCare('water')"
-                                    class="clay-button flex items-center justify-center gap-3 py-3.5 px-4 rounded-2xl bg-white border border-[#E9F4ED] hover:bg-[#F2FAF5]">
+                                    class="clay-button flex items-center justify-center gap-3 py-3.5 px-4 rounded-2xl bg-white border border-[#E3F2E8] hover:bg-[#F2FAF5]">
                                     <div
                                         class="w-10 h-10 rounded-2xl bg-[#E6F5FC] text-[#3498DB] flex items-center justify-center text-lg shadow-inner">
                                         💧</div>
                                     <div class="text-left">
-                                        <span class="block text-xs font-bold text-[#2D3E33]">Water Plant</span>
-                                        <span class="block text-[10px] font-semibold text-[#3498DB]">+15%
-                                            Moisture</span>
+                                        <span class="block text-xs font-bold text-[#163824]">Water Plant</span>
+                                        <span class="block text-[10px] font-bold text-[#3498DB]">+15% Moisture</span>
                                     </div>
                                 </button>
                                 <button onclick="applyCare('breeze')"
-                                    class="clay-button flex items-center justify-center gap-3 py-3.5 px-4 rounded-2xl bg-white border border-[#E9F4ED] hover:bg-[#F2FAF5]">
+                                    class="clay-button flex items-center justify-center gap-3 py-3.5 px-4 rounded-2xl bg-white border border-[#E3F2E8] hover:bg-[#F2FAF5]">
                                     <div
                                         class="w-10 h-10 rounded-2xl bg-[#E8F8F0] text-[#2ECC71] flex items-center justify-center text-lg shadow-inner">
                                         🍃</div>
                                     <div class="text-left">
-                                        <span class="block text-xs font-bold text-[#2D3E33]">Gentle Breeze</span>
-                                        <span class="block text-[10px] font-semibold text-[#2ECC71]">+10% Air
-                                            Flow</span>
+                                        <span class="block text-xs font-bold text-[#163824]">Gentle Breeze</span>
+                                        <span class="block text-[10px] font-bold text-[#2ECC71]">+10% Air Flow</span>
                                     </div>
                                 </button>
                             </div>
@@ -236,18 +393,18 @@
                     <!-- Modals -->
                     <div id="addModal"
                         class="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-                        <div class="clay-card max-w-sm w-full p-6 text-left">
-                            <h3 class="text-xl font-bold font-['Quicksand'] text-[#2D3E33] mb-1">Adopt New Flora</h3>
-                            <p class="text-xs text-[#768C7E] mb-5">Choose from available catalog species and nickname
+                        <div class="clay-card max-w-sm w-full p-6 text-left shadow-2xl">
+                            <h3 class="text-xl font-bold font-['Quicksand'] text-[#163824] mb-1">Adopt New Flora</h3>
+                            <p class="text-xs text-[#638472] mb-5">Choose from available catalog species and nickname
                                 your plant.</p>
                             <form onsubmit="savePlant(event)">
-                                <label class="block text-xs font-bold text-[#556F5D] mb-1">Nickname</label>
+                                <label class="block text-xs font-bold text-[#4B6F57] mb-1.5">Nickname</label>
                                 <input type="text" id="addNickname" required placeholder="e.g., Greenie"
-                                    class="w-full bg-[#F4F1EA] rounded-xl px-4 py-2.5 text-sm mb-4 outline-none border border-transparent focus:border-[#4E9F6E]">
-                                <label class="block text-xs font-bold text-[#556F5D] mb-1">Select Species (Oracle
+                                    class="clay-input w-full rounded-xl px-4 py-2.5 text-sm mb-4 outline-none">
+                                <label class="block text-xs font-bold text-[#4B6F57] mb-1.5">Select Species (Oracle
                                     Catalog)</label>
                                 <select id="addSpecies"
-                                    class="w-full bg-[#F4F1EA] rounded-xl px-4 py-2.5 text-sm mb-6 outline-none border border-transparent focus:border-[#4E9F6E]">
+                                    class="clay-input w-full rounded-xl px-4 py-2.5 text-sm mb-6 outline-none text-[#163824] font-medium">
                                     <% for (String sp : speciesCatalog) { %>
                                         <option value="<%= sp %>">🌿 <%= sp %>
                                         </option>
@@ -255,9 +412,9 @@
                                 </select>
                                 <div class="flex gap-3">
                                     <button type="button" onclick="closeModal('addModal')"
-                                        class="w-1/2 py-2.5 bg-gray-100 rounded-xl text-xs font-bold text-gray-600">Cancel</button>
+                                        class="w-1/2 py-2.5 bg-gray-100 hover:bg-gray-200 rounded-xl text-xs font-bold text-gray-600 transition">Cancel</button>
                                     <button type="submit"
-                                        class="w-1/2 py-2.5 bg-[#4E9F6E] text-white rounded-xl text-xs font-bold shadow-md">Adopt</button>
+                                        class="w-1/2 py-2.5 bg-[#36925B] hover:bg-[#2B7A4B] text-white rounded-xl text-xs font-bold shadow-md transition">Adopt</button>
                                 </div>
                             </form>
                         </div>
@@ -265,16 +422,17 @@
 
                     <div id="editModal"
                         class="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-                        <div class="clay-card max-w-sm w-full p-6 text-left">
-                            <h3 class="text-xl font-bold font-['Quicksand'] text-[#2D3E33] mb-1">Rename Plant</h3>
+                        <div class="clay-card max-w-sm w-full p-6 text-left shadow-2xl">
+                            <h3 class="text-xl font-bold font-['Quicksand'] text-[#163824] mb-1">Rename Plant</h3>
+                            <p class="text-xs text-[#638472] mb-4">Give your plant companion a new nickname.</p>
                             <form onsubmit="saveName(event)">
                                 <input type="text" id="editNickname" required
-                                    class="w-full bg-[#F4F1EA] rounded-xl px-4 py-2.5 text-sm my-4 outline-none border border-transparent focus:border-[#4E9F6E]">
+                                    class="clay-input w-full rounded-xl px-4 py-2.5 text-sm mb-5 outline-none">
                                 <div class="flex gap-3">
                                     <button type="button" onclick="closeModal('editModal')"
-                                        class="w-1/2 py-2.5 bg-gray-100 rounded-xl text-xs font-bold text-gray-600">Cancel</button>
+                                        class="w-1/2 py-2.5 bg-gray-100 hover:bg-gray-200 rounded-xl text-xs font-bold text-gray-600 transition">Cancel</button>
                                     <button type="submit"
-                                        class="w-1/2 py-2.5 bg-[#4E9F6E] text-white rounded-xl text-xs font-bold shadow-md">Save</button>
+                                        class="w-1/2 py-2.5 bg-[#36925B] hover:bg-[#2B7A4B] text-white rounded-xl text-xs font-bold shadow-md transition">Save</button>
                                 </div>
                             </form>
                         </div>

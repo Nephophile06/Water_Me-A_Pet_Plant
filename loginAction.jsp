@@ -18,8 +18,7 @@
                 insertPs.setString(2, hashedPassword); insertPs.executeUpdate(); ResultSet
                 genKeys=insertPs.getGeneratedKeys(); int newUserId=0; if (genKeys.next()) newUserId=genKeys.getInt(1);
                 if (newUserId> 0) {
-                String plantSql = "INSERT INTO user_plants (user_id, nickname, species_name, health_points,
-                growth_stage) " +
+                String plantSql = "INSERT INTO user_plants (user_id, nickname, species_name, health_points, growth_stage) " +
                 "SELECT ?, 'First Sprout', species_name, 20, 1 " +
                 "FROM plant_species WHERE species_name = 'Money Plant'";
                 PreparedStatement plantPs = conn.prepareStatement(plantSql);

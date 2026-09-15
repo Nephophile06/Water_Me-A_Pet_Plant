@@ -232,27 +232,27 @@ function renderSpeciesVector(species, health, stage) {
                 '<ellipse cx="110" cy="105" rx="14" ry="7" transform="rotate(30 110 105)" fill="' + colors.green1 + '"/>' +
                 '<ellipse cx="95" cy="90" rx="12" ry="6" fill="' + colors.green2 + '"/>' +
                 '</svg>';
-        } 	else {
-		    return '<svg width="220" height="220" viewBox="0 0 220 220" fill="none">' +
-		        '<path d="M110 200 Q90 130 110 60" stroke="' + colors.stem + '" stroke-width="7" stroke-linecap="round"/>' +
-		        '<ellipse cx="82" cy="170" rx="22" ry="11" transform="rotate(-50 82 170)" fill="' + colors.green1 + '" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.15))"/>' +
-		        '<ellipse cx="138" cy="160" rx="22" ry="11" transform="rotate(50 138 160)" fill="' + colors.green2 + '" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.15))"/>' +
-		        '<ellipse cx="86" cy="135" rx="20" ry="10" transform="rotate(-40 86 135)" fill="' + colors.green3 + '"/>' +
-		        '<ellipse cx="134" cy="125" rx="20" ry="10" transform="rotate(40 134 125)" fill="' + colors.green1 + '"/>' +
-		        '<ellipse cx="92" cy="105" rx="18" ry="9" transform="rotate(-30 92 105)" fill="' + colors.green2 + '"/>' +
-		        '<ellipse cx="128" cy="100" rx="18" ry="9" transform="rotate(30 128 100)" fill="' + colors.green3 + '"/>' +
-		        '<ellipse cx="100" cy="80" rx="16" ry="8" transform="rotate(-20 100 80)" fill="' + colors.green1 + '"/>' +
-		        '<ellipse cx="120" cy="78" rx="16" ry="8" transform="rotate(20 120 78)" fill="' + colors.green2 + '"/>' +
+        } else {
+            return '<svg width="220" height="220" viewBox="0 0 220 220" fill="none">' +
+                '<path d="M110 200 Q90 130 110 60" stroke="' + colors.stem + '" stroke-width="7" stroke-linecap="round"/>' +
+                '<ellipse cx="82" cy="170" rx="22" ry="11" transform="rotate(-50 82 170)" fill="' + colors.green1 + '" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.15))"/>' +
+                '<ellipse cx="138" cy="160" rx="22" ry="11" transform="rotate(50 138 160)" fill="' + colors.green2 + '" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.15))"/>' +
+                '<ellipse cx="86" cy="135" rx="20" ry="10" transform="rotate(-40 86 135)" fill="' + colors.green3 + '"/>' +
+                '<ellipse cx="134" cy="125" rx="20" ry="10" transform="rotate(40 134 125)" fill="' + colors.green1 + '"/>' +
+                '<ellipse cx="92" cy="105" rx="18" ry="9" transform="rotate(-30 92 105)" fill="' + colors.green2 + '"/>' +
+                '<ellipse cx="128" cy="100" rx="18" ry="9" transform="rotate(30 128 100)" fill="' + colors.green3 + '"/>' +
+                '<ellipse cx="100" cy="80" rx="16" ry="8" transform="rotate(-20 100 80)" fill="' + colors.green1 + '"/>' +
+                '<ellipse cx="120" cy="78" rx="16" ry="8" transform="rotate(20 120 78)" fill="' + colors.green2 + '"/>' +
 
-		        '<path d="M110 70 Q95 45 110 25 Q125 45 110 70Z" fill="#FFFFFF" filter="drop-shadow(0 6px 12px rgba(0,0,0,0.2))"/>' +
-		        '<path d="M110 65 Q100 48 110 32 Q120 48 110 65Z" fill="#F8F8FF" opacity="0.9"/>' +
-		        '<path d="M110 60 Q105 50 110 40 Q115 50 110 60Z" fill="#FFFAF0" opacity="0.7"/>' +
+                '<path d="M110 70 Q95 45 110 25 Q125 45 110 70Z" fill="#FFFFFF" filter="drop-shadow(0 6px 12px rgba(0,0,0,0.2))"/>' +
+                '<path d="M110 65 Q100 48 110 32 Q120 48 110 65Z" fill="#F8F8FF" opacity="0.9"/>' +
+                '<path d="M110 60 Q105 50 110 40 Q115 50 110 60Z" fill="#FFFAF0" opacity="0.7"/>' +
 
-		        '<ellipse cx="110" cy="48" rx="4" ry="18" fill="#FFD700" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.15))"/>' +
-		        '<ellipse cx="110" cy="42" rx="3" ry="12" fill="#FFA500" opacity="0.8"/>' +
-		        '<ellipse cx="110" cy="90" rx="14" ry="7" fill="' + colors.green3 + '" opacity="0.8"/>' +
-		        '</svg>';
-		}
+                '<ellipse cx="110" cy="48" rx="4" ry="18" fill="#FFD700" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.15))"/>' +
+                '<ellipse cx="110" cy="42" rx="3" ry="12" fill="#FFA500" opacity="0.8"/>' +
+                '<ellipse cx="110" cy="90" rx="14" ry="7" fill="' + colors.green3 + '" opacity="0.8"/>' +
+                '</svg>';
+        }
     }
 
     // ========== 7. ALOE VERA (রোজেট আকৃতির সাকুলেন্ট) ==========
@@ -584,22 +584,27 @@ function renderUI() {
         window.activePlantId = window.userPlants[0].id;
     }
 
-    window.userPlants.forEach(function(plant) {
+    window.userPlants.forEach(function (plant) {
         var isActive = plant.id === window.activePlantId;
         var card = document.createElement('div');
-        card.className = 'clay-card p-3.5 rounded-2xl cursor-pointer transition flex items-center justify-between border ' +
-            (isActive ? 'border-[#4E9F6E] bg-[#F3FAF5]' : 'border-transparent hover:border-[#DFD7CC]');
-        
-        card.onclick = function() { window.activePlantId = plant.id; renderUI(); };
+        card.className = 'clay-card p-3 rounded-2xl cursor-pointer transition-all duration-200 flex items-center justify-between border ' +
+            (isActive ? 'border-[#36925B] bg-gradient-to-r from-[#F0F9F4] to-[#FFFFFF] shadow-md ring-2 ring-[#36925B]/20 -translate-y-0.5' : 'border-transparent bg-white/80 hover:bg-white hover:border-[#D3E8DC] hover:shadow-sm');
 
-        var healthBadgeClass = plant.health >= 50 ? 'bg-[#E5F5EC] text-[#2F7E4E]' : 'bg-[#FFF0ED] text-[#D16D65]';
+        card.onclick = function () { window.activePlantId = plant.id; renderUI(); };
 
-        card.innerHTML = '<div>' +
-            '<h4 class="text-sm font-bold text-[#2D3E33]">' + (plant.name || 'Unnamed') + '</h4>' +
-            '<span class="text-[11px] text-[#71887A]">' + (plant.species || 'Flora') + '</span>' +
+        var healthBadgeClass = plant.health >= 60 ? 'bg-[#E5F5EC] text-[#247E49] border border-[#CDEBD8]' : (plant.health >= 30 ? 'bg-[#FEF3C7] text-[#D97706] border border-[#FDE68A]' : 'bg-[#FFF0ED] text-[#D16D65] border border-[#FECDD3]');
+
+        card.innerHTML = '<div class="flex items-center gap-2.5">' +
+            '<div class="w-8 h-8 rounded-xl ' + (isActive ? 'bg-[#36925B] text-white shadow-xs' : 'bg-[#EBF7F0] text-[#2D7A46]') + ' flex items-center justify-center text-sm font-bold transition">' +
+            (plant.species && plant.species.indexOf('Bonsai') !== -1 ? '🪴' : (plant.species && plant.species.indexOf('Monstera') !== -1 ? '🌿' : (plant.species && plant.species.indexOf('Jasmine') !== -1 ? '🌸' : '🌱'))) +
             '</div>' +
-            '<span class="px-2.5 py-1 text-xs font-bold rounded-xl ' + healthBadgeClass + '">' + plant.health + '%</span>';
-        
+            '<div>' +
+            '<h4 class="text-xs sm:text-sm font-bold ' + (isActive ? 'text-[#163824]' : 'text-[#2D3E33]') + '">' + (plant.name || 'Unnamed') + '</h4>' +
+            '<span class="text-[10px] text-[#71887A] font-semibold">' + (plant.species || 'Flora') + '</span>' +
+            '</div>' +
+            '</div>' +
+            '<span class="px-2.5 py-1 text-[11px] font-extrabold rounded-xl shadow-xs ' + healthBadgeClass + '">' + plant.health + '%</span>';
+
         container.appendChild(card);
     });
 
@@ -617,7 +622,7 @@ function renderUI() {
         document.getElementById('activeSpeciesBadge').innerText = active.species;
         document.getElementById('healthDisplay').innerText = active.health + '%';
         document.getElementById('healthBar').style.width = active.health + '%';
-        
+
         document.getElementById('plantVisualStage').innerHTML = renderSpeciesVector(active.species, active.health, active.stage);
 
         var careContainer = document.getElementById('careActionsContainer');
