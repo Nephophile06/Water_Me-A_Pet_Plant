@@ -1,0 +1,88 @@
+# =========================================================================
+# 🌿 Grow With Time — .gitignore
+# Java / JSP / Servlet / Apache Tomcat / Oracle DB / IDE Artifacts
+# =========================================================================
+
+# 1. Compiled Java Classes & Build Output
+*.class
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# Build tool directories
+target/
+build/
+bin/
+out/
+dist/
+
+# 2. Apache Tomcat Runtime & Server Artifacts
+work/
+temp/
+logs/
+*.log
+.tomcatplugin
+
+# 3. IDE Configurations & Metadata
+# Eclipse
+.metadata/
+.recommenders/
+.settings/
+.project
+.classpath
+.springBeans
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+cmake-build-*/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-build.xml
+
+# 4. OS-Specific Metadata Files
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# 5. Backup & Temporary Files
+*.bak
+*.tmp
+*.swp
+*~
+.#*
+
+# 6. Database / Local Environment Overrides (Keep sample configs)
+*.sqlite3
+*.db
+local.properties
+.env
+.env.local
+
+# 7. Whitelist Important Project Libraries (Allow JDBC driver in WEB-INF/lib)
+!src/main/webapp/WEB-INF/lib/*.jar
