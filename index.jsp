@@ -22,7 +22,8 @@
                 }
 
                 String sql = "SELECT plant_id, nickname, species_name, NVL(health_points, 20) AS health_points, " +
-                "NVL(growth_stage, 1) AS growth_stage, last_cared_at, created_at FROM user_plants WHERE user_id = ? ORDER BY plant_id ASC";
+                "NVL(growth_stage, 1) AS growth_stage, last_cared_at, created_at FROM user_plants WHERE user_id = ?
+                ORDER BY plant_id ASC";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setInt(1, currentUserId);
                 ResultSet rs = ps.executeQuery();
@@ -489,7 +490,7 @@
                         </div>
                     </div>
 
-                    <!-- Pass Java variables to JS safely -->
+                    <!-- Pass Java variables to JS -->
                     <script id="server-data" type="application/json">
         {
             "userPlants": <%= plantsJson.toString() %>,

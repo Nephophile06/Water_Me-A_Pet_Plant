@@ -51,8 +51,8 @@ function toggleAuthMode() {
     if (authToggleText) authToggleText.innerText = isLogin ? 'First time around?' : 'Tended a plant before?';
     if (authToggleBtn) authToggleBtn.innerText = isLogin ? 'Adopt & Plant a seed here' : 'Hop back in';
     if (plantGreeting) plantGreeting.innerText = isLogin
-        ? '🌿 A quick breeze keeps the leaves dancing!'
-        : '🌿 Your little sprout is already excited to meet you!';
+        ? 'A quick breeze keeps the leaves dancing!'
+        : 'Your little sprout is already excited to meet you!';
 }
 
 function togglePasswordVisibility() {

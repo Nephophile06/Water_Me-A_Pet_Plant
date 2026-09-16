@@ -87,10 +87,10 @@
                 </svg>
             </div>
 
-            <!-- Redesigned Stylized Flying Birds (Silhouette with Head, Wings & Forked Tail) -->
+            <!-- Flying Birds (Silhouette with Head, Wings & Forked Tail) -->
             <div class="absolute bird-soar-1 top-[16%] left-0">
                 <svg width="44" height="26" viewBox="0 0 60 36" fill="none" class="text-[#325842] wing-flap">
-                    <!-- Graceful Soaring Bird Silhouette -->
+                    <!-- Soaring Bird Silhouette -->
                     <path
                         d="M30 18 C26 12 16 4 2 2 C8 10 18 16 26 22 L24 34 L30 26 L36 34 L34 22 C42 16 52 10 58 2 C44 4 34 12 30 18 Z"
                         fill="currentColor" />
@@ -107,7 +107,7 @@
                 </svg>
             </div>
 
-            <!-- Larger & Crisper Floating Leaves in Breeze -->
+            <!-- Floating Leaves in Breeze -->
             <!-- Leaf 1 (Fresh Emerald) -->
             <div class="ambient-leaf leaf-drift-1 top-4 left-[14%]">
                 <svg width="42" height="42" viewBox="0 0 36 36" fill="none" class="text-[#2EB867] drop-shadow-sm">
@@ -280,7 +280,7 @@
                     </button>
                 </div>
 
-                <!-- Small Warm Footer Note -->
+                <!-- Small Footer Note -->
                 <div class="mt-3.5 text-[11px] text-[#6E9880] font-semibold" id="plantGreeting">
                     🌿 A quick breeze keeps the leaves dancing!
                 </div>

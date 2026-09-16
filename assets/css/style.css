@@ -21,7 +21,7 @@ body {
     color: var(--text-dark);
 }
 
-/* Beautiful Balanced Pastel Sky Background */
+/* Pastel Sky Background */
 .nature-sky-bg {
     background: linear-gradient(180deg, #CEE7F8 0%, #D8EEFB 35%, #E5F5EF 75%, #DCF2E6 100%);
     position: relative;
@@ -250,7 +250,7 @@ body {
     }
 }
 
-/* Leaves Falling & Drifting (Bigger size keyframes) */
+/* Leaves Falling & Drifting */
 .leaf-drift-1 {
     animation: leafFall1 15s ease-in-out infinite;
 }

@@ -2,7 +2,7 @@ function renderSpeciesVector(species, health, stage) {
     var isWithered = health < 25;
     var sp = (species || '').toLowerCase();
 
-    // রঙের প্যালেট (স্বাস্থ্য অনুযায়ী)
+    // color pallette
     var colors = {
         green1: isWithered ? '#8B7355' : '#4E8A5E',
         green2: isWithered ? '#A0896C' : '#64B87D',
@@ -12,7 +12,7 @@ function renderSpeciesVector(species, health, stage) {
         flower: isWithered ? '#D4A5A5' : '#FF6B9D'
     };
 
-    // ========== 1. MONEY PLANT (হার্ট আকৃতির পাতা, লতানো) ==========
+    // ========== 1. MONEY PLANT (heart shaped leaf, climbing) ==========
     if (sp.indexOf('money') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -49,7 +49,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 2. JASMINE (সাদা ছোট ফুল) ==========
+    // ========== 2. JASMINE (white small flower) ==========
     if (sp.indexOf('jasmine') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -99,7 +99,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 3. MONSTERA (চিড়যুক্ত বড় পাতা) ==========
+    // ========== 3. MONSTERA (split large leaf) ==========
     if (sp.indexOf('monstera') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -137,7 +137,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 4. MINIATURE BONSAI (বাঁকানো গুঁড়ি, ছোট ক্যানোপি) ==========
+    // ========== 4. MINIATURE BONSAI (twisted trunk, small canopy) ==========
     if (sp.indexOf('bonsai') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -174,7 +174,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 5. SNAKE PLANT (লম্বা খাড়া পাতা) ==========
+    // ========== 5. SNAKE PLANT (tall upright leaf) ==========
     if (sp.indexOf('snake') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -209,7 +209,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 6. PEACE LILY (সাদা ফুলের স্প্যাথ) ==========
+    // ========== 6. PEACE LILY (white flowered spathe) ==========
     if (sp.indexOf('peace') !== -1 || sp.indexOf('lily') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -255,7 +255,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 7. ALOE VERA (রোজেট আকৃতির সাকুলেন্ট) ==========
+    // ========== 7. ALOE VERA (rosette shaped succulent) ==========
     if (sp.indexOf('aloe') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -298,7 +298,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 8. CALATHEA (প্যাটার্নযুক্ত ডিম্বাকৃতি পাতা) ==========
+    // ========== 8. CALATHEA (patterned oval leaf) ==========
     if (sp.indexOf('calathea') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -342,7 +342,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 9. ROSE (কাঁটাযুক্ত ডাঁটা, লাল ফুল) ==========
+    // ========== 9. ROSE (thorned stem, red flower) ==========
     if (sp.indexOf('rose') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -395,7 +395,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 10. LAVENDER (বেগুনি স্পাইক ফুল) ==========
+    // ========== 10. LAVENDER (purple spike flower) ==========
     if (sp.indexOf('lavender') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -458,7 +458,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 11. JADE PLANT (গোল মাংসল পাতা) ==========
+    // ========== 11. JADE PLANT (round fleshy leaf) ==========
     if (sp.indexOf('jade') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -508,7 +508,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== 12. FERN (পাখির পালকের মতো ফ্রন্ড) ==========
+    // ========== 12. FERN (bird feather like frond) ==========
     if (sp.indexOf('fern') !== -1) {
         if (stage === 1) {
             return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
@@ -557,7 +557,7 @@ function renderSpeciesVector(species, health, stage) {
         }
     }
 
-    // ========== DEFAULT (যদি কোনো প্রজাতি ম্যাচ না করে) ==========
+    // ========== DEFAULT (if no species match) ==========
     return '<svg width="190" height="200" viewBox="0 0 190 200" fill="none">' +
         '<path d="M95 180 Q90 120 95 60" stroke="' + colors.stem + '" stroke-width="5" stroke-linecap="round"/>' +
         '<path d="M93 140 Q60 135 48 105 Q70 95 93 130" fill="' + colors.green1 + '" filter="drop-shadow(2px 4px 4px rgba(0,0,0,0.1))"/>' +

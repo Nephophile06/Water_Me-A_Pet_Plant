@@ -1,4 +1,4 @@
-// Auth verification
+// Auth verification 
 const currentUser = localStorage.getItem('active_botanica_user') || 'DemoUser';
 document.getElementById('currentUserLabel').innerText = currentUser;
 
@@ -87,9 +87,8 @@ function renderUI() {
     userPlants.forEach(plant => {
         const isActive = plant.id === activePlantId;
         const card = document.createElement('div');
-        card.className = `clay-card p-3.5 rounded-2xl cursor-pointer transition flex items-center justify-between border ${
-            isActive ? 'border-[#4E9F6E] bg-[#F3FAF5]' : 'border-transparent hover:border-[#DFD7CC]'
-        }`;
+        card.className = `clay-card p-3.5 rounded-2xl cursor-pointer transition flex items-center justify-between border ${isActive ? 'border-[#4E9F6E] bg-[#F3FAF5]' : 'border-transparent hover:border-[#DFD7CC]'
+            }`;
         card.onclick = () => { activePlantId = plant.id; renderUI(); };
 
         card.innerHTML = `
@@ -97,8 +96,7 @@ function renderUI() {
                 <h4 class="text-sm font-bold text-[#2D3E33]">${plant.name}</h4>
                 <span class="text-[11px] text-[#71887A]">${plant.species}</span>
             </div>
-            <span class="px-2.5 py-1 text-xs font-bold rounded-xl ${
-                plant.health >= 50 ? 'bg-[#E5F5EC] text-[#2F7E4E]' : 'bg-[#FFF0ED] text-[#D16D65]'
+            <span class="px-2.5 py-1 text-xs font-bold rounded-xl ${plant.health >= 50 ? 'bg-[#E5F5EC] text-[#2F7E4E]' : 'bg-[#FFF0ED] text-[#D16D65]'
             }">${plant.health}%</span>
         `;
         container.appendChild(card);
