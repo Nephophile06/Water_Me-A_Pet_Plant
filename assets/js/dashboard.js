@@ -834,6 +834,8 @@ function applyCare(type) {
     var prevHp = active.health;
     var targetHp = Math.min(100, prevHp + boost);
     active.health = targetHp;
+    active.baseHealth = targetHp;
+    active.lastCared = Date.now();
 
     if (targetHp >= 100) active.stage = 4;
     else if (targetHp >= 60) active.stage = 3;
@@ -878,6 +880,56 @@ function applyCare(type) {
             console.error('Care persistence error:', err);
             isCareApplying = false;
         });
+}
+
+function checkPlantDecay() {
+    if (!window.userPlants || window.userPlants.length === 0) return;
+    var now = Date.now();
+    var hasChanged = false;
+    window.userPlants.forEach(function (plant) {
+        var lastCared = plant.lastCared || now;
+        var base = (typeof plant.baseHealth === 'number') ? plant.baseHealth : plant.health;
+        var elapsedHours = (now - lastCared) / (1000 * 60 * 60);
+        var decay = 0;
+        if (elapsedHours >= 2.0) {
+            decay = Math.floor((elapsedHours / 2.0) * 6);
+        }
+        var calculatedHp = Math.max(0, base - decay);
+        if (calculatedHp !== plant.health) {
+            plant.health = calculatedHp;
+            if (calculatedHp >= 100) plant.stage = 4;
+            else if (calculatedHp >= 60) plant.stage = 3;
+            else if (calculatedHp >= 30) plant.stage = 2;
+            else plant.stage = 1;
+            updatePlantCardBadge(plant);
+            hasChanged = true;
+        }
+    });
+
+    if (hasChanged && window.activePlantId) {
+        var active = null;
+        for (var i = 0; i < window.userPlants.length; i++) {
+            if (window.userPlants[i].id === window.activePlantId) {
+                active = window.userPlants[i];
+                break;
+            }
+        }
+        if (active) {
+            var healthDisplay = document.getElementById('healthDisplay');
+            if (healthDisplay) healthDisplay.innerText = active.health + '%';
+            var healthBar = document.getElementById('healthBar');
+            if (healthBar) healthBar.style.width = active.health + '%';
+            var stageContainer = document.getElementById('plantVisualStage');
+            if (stageContainer) {
+                stageContainer.innerHTML = renderSpeciesVector(active.species, active.health, active.stage);
+            }
+            var careContainer = document.getElementById('careActionsContainer');
+            if (careContainer) {
+                if (active.stage === 4) careContainer.style.display = 'none';
+                else careContainer.style.display = 'grid';
+            }
+        }
+    }
 }
 
 function savePlant(e) {
@@ -930,4 +982,7 @@ function logoutUser() {
 function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
 function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-document.addEventListener('DOMContentLoaded', renderUI);
+document.addEventListener('DOMContentLoaded', function () {
+    renderUI();
+    setInterval(checkPlantDecay, 30000);
+});

@@ -22,11 +22,12 @@
                 }
 
                 String sql = "SELECT plant_id, nickname, species_name, NVL(health_points, 20) AS health_points, " +
-                "NVL(growth_stage, 1) AS growth_stage FROM user_plants WHERE user_id = ? ORDER BY plant_id ASC";
+                "NVL(growth_stage, 1) AS growth_stage, last_cared_at, created_at FROM user_plants WHERE user_id = ? ORDER BY plant_id ASC";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setInt(1, currentUserId);
                 ResultSet rs = ps.executeQuery();
 
+                long nowMillis = System.currentTimeMillis();
                 boolean first = true;
                 while (rs.next()) {
                 totalCount++;
@@ -40,15 +41,50 @@
                 "Plant";
                 String spec = rs.getString("species_name") != null ? rs.getString("species_name").replace("\"", "\\\"")
                 : "Money Plant";
-                int hp = rs.getInt("health_points");
-                int stg = rs.getInt("growth_stage");
+                int baseHp = rs.getInt("health_points");
+                int baseStg = rs.getInt("growth_stage");
+
+                Timestamp lastCaredTs = null;
+                try {
+                lastCaredTs = rs.getTimestamp("last_cared_at");
+                if (lastCaredTs == null) {
+                lastCaredTs = rs.getTimestamp("created_at");
+                }
+                } catch (Exception tsex) {
+                lastCaredTs = null;
+                }
+                if (lastCaredTs == null) {
+                lastCaredTs = new Timestamp(nowMillis);
+                }
+
+                long lastCaredMillis = lastCaredTs.getTime();
+                double hoursElapsed = (nowMillis - lastCaredMillis) / (1000.0 * 60.0 * 60.0);
+                int decay = 0;
+                if (hoursElapsed >= 2.0) {
+                decay = (int) Math.floor((hoursElapsed / 2.0) * 6.0);
+                }
+
+                int currentHp = Math.max(0, baseHp - decay);
+                int currentStage;
+                if (currentHp >= 100) {
+                currentStage = 4;
+                } else if (currentHp >= 60) {
+                currentStage = 3;
+                } else if (currentHp >= 30) {
+                currentStage = 2;
+                } else {
+                currentStage = 1;
+                }
 
                 if (!first) plantsJson.append(",");
                 plantsJson.append("{\"id\":").append(pid)
                 .append(",\"name\":\"").append(nick).append("\"")
                 .append(",\"species\":\"").append(spec).append("\"")
-                .append(",\"health\":").append(hp)
-                .append(",\"stage\":").append(stg).append("}");
+                .append(",\"health\":").append(currentHp)
+                .append(",\"stage\":").append(currentStage)
+                .append(",\"baseHealth\":").append(baseHp)
+                .append(",\"lastCared\":").append(lastCaredMillis)
+                .append("}");
                 first = false;
                 }
                 } catch(Exception e) {
