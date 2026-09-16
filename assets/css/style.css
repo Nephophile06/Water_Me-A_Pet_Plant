@@ -341,9 +341,13 @@ body {
     }
 }
 
-/* Custom Scrollbar */
+#plantListContainer {
+    overscroll-behavior: contain;
+    scroll-behavior: smooth;
+}
+
 #plantListContainer::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
 }
 
 #plantListContainer::-webkit-scrollbar-track {
@@ -351,7 +355,7 @@ body {
 }
 
 #plantListContainer::-webkit-scrollbar-thumb {
-    background-color: #DFD7CC;
+    background-color: #C8DFD2;
     border-radius: 20px;
 }
 

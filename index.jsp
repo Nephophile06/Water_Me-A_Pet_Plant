@@ -63,7 +63,7 @@
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Water Me - A Pet Plant - Habitat</title>
+                    <title>Water Me - A Pet Plant</title>
                     <link rel="preconnect" href="https://fonts.googleapis.com">
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                     <link
@@ -217,30 +217,31 @@
                         </div>
                     </div>
 
-                    <!-- Main Habitat Dashboard Container -->
+                    <!-- Main Dashboard Container -->
                     <main
                         class="clay-card w-full max-w-5xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 relative overflow-hidden z-20 shadow-2xl">
                         <!-- Top Navigation Bar -->
                         <header class="lg:col-span-12 flex items-center justify-between pb-6 border-b border-[#EAEFEA]">
                             <div class="flex items-center gap-3.5">
                                 <div
-                                    class="w-11 h-11 rounded-2xl bg-gradient-to-b from-[#EBF8F0] to-[#D2EFE0] flex items-center justify-center text-xl shadow-inner border border-white gentle-bounce">
-                                    🌱
+                                    class="w-11 h-11 rounded-2xl bg-gradient-to-b from-[#EBF8F0] to-[#D2EFE0] flex items-center justify-center text-[#2E8B57] shadow-inner border border-white gentle-bounce">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M7 20h10" />
+                                        <path d="M10 20c0-4 2-7 2-11" />
+                                        <path d="M12 9c2-2 5-3 8-1-1 4-3 7-8 7" fill="#34D399" fill-opacity="0.3" />
+                                        <path d="M12 13c-2-2-5-3-8-1 1 4 3 7 8 7" fill="#34D399" fill-opacity="0.3" />
+                                    </svg>
                                 </div>
                                 <div>
                                     <h1
                                         class="text-xl sm:text-2xl font-bold font-['Quicksand'] text-[#163824] tracking-tight">
-                                        Water Me - A Pet Plant</h1>
+                                        Water Me</h1>
                                     <div class="flex items-center gap-2 mt-0.5">
-                                        <p class="text-[11px] text-[#60806E] font-semibold">Gardener: <span
+                                        <p class="text-[11px] text-[#60806E] font-semibold">Plant Parent: <span
                                                 class="text-[#2F7E4E] font-bold">
                                                 <%= currentUsername %>
                                             </span></p>
-                                        <span
-                                            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EBF8F0] text-[#247E49] text-[10px] font-extrabold border border-[#D0EFE0]">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse"></span>
-                                            Active Habitat
-                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -270,17 +271,19 @@
                                 <div class="flex items-center justify-between mb-3">
                                     <span
                                         class="text-[11px] font-extrabold uppercase tracking-wider text-[#638472] block">Your
-                                        Botanical Sanctuary</span>
+                                        Corner</span>
                                 </div>
-                                <div class="space-y-3 max-h-[420px] overflow-y-auto pr-1.5" id="plantListContainer">
+                                <div class="space-y-2.5 max-h-[420px] overflow-y-auto p-1.5 pr-2"
+                                    id="plantListContainer">
                                 </div>
                             </div>
                             <div
-                                class="p-4 rounded-2xl bg-[#F0F7F2]/80 border border-[#DCEEE3] flex items-center justify-between text-xs font-semibold text-[#486B57] shadow-xs">
-                                <span>Total Cultivated</span>
+                                class="p-3.5 rounded-2xl bg-[#F0F7F2]/80 border border-[#DCEEE3] flex items-center justify-between text-xs font-semibold text-[#486B57] shadow-xs">
+                                <span class="font-bold text-[#3B624B]">Green Family:</span>
                                 <span
-                                    class="px-3 py-0.5 rounded-full bg-white text-[#247E49] shadow-sm font-bold border border-[#E0EFE6]">
-                                    <%= totalCount %> Flora
+                                    class="px-3 py-1 rounded-xl bg-white text-[#247E49] shadow-xs font-extrabold border border-[#D4E8DC] text-[11px]">
+                                    <%= totalCount %>
+                                        <%= totalCount==1 ? "Member" : "Members" %>
                                 </span>
                             </div>
                         </aside>

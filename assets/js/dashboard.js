@@ -567,13 +567,165 @@ function renderSpeciesVector(species, health, stage) {
         '</svg>';
 }
 
+function getSpeciesThumbnailSvg(species) {
+    var sp = (species || '').toLowerCase();
+    if (sp.indexOf('bonsai') !== -1) {
+        return '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M7 19h10" />' +
+            '<path d="M8 22h8" />' +
+            '<path d="M12 15v4" />' +
+            '<path d="M12 11c-2-2-4-2-6 0-1.5 1.5-1 4 1 5 2.5 1 5-1 5-5z" fill="currentColor" fill-opacity="0.25" />' +
+            '<path d="M12 9c2-2 4-2 6 0 1.5 1.5 1 4-1 5-2.5 1-5-1-5-5z" fill="currentColor" fill-opacity="0.25" />' +
+            '<path d="M12 6a3 3 0 0 1 3-3 3 3 0 0 1 3 3c0 2-2 3-3 3-2 0-3-1-3-3z" fill="currentColor" fill-opacity="0.25" />' +
+            '</svg>';
+    } else if (sp.indexOf('monstera') !== -1) {
+        return '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M12 21c-4-4-8-7-8-13a8 8 0 0 1 16 0c0 6-4 9-8 13z" fill="currentColor" fill-opacity="0.2" />' +
+            '<path d="M12 3v18" />' +
+            '<path d="M12 8c2.5-1.5 4.5-1 6 .5" />' +
+            '<path d="M12 13c2.5-1.5 4.5-1 5.5.5" />' +
+            '<path d="M12 8c-2.5-1.5-4.5-1-6 .5" />' +
+            '<path d="M12 13c-2.5-1.5-4.5-1-5.5.5" />' +
+            '</svg>';
+    } else if (sp.indexOf('jasmine') !== -1) {
+        return '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<circle cx="12" cy="12" r="2.5" fill="currentColor" />' +
+            '<path d="M12 3a2.5 2.5 0 0 1 2.5 2.5c0 2-2.5 4-2.5 4s-2.5-2-2.5-4A2.5 2.5 0 0 1 12 3z" fill="currentColor" fill-opacity="0.2" />' +
+            '<path d="M21 12a2.5 2.5 0 0 1-2.5 2.5c-2 0-4-2.5-4-2.5s2-2.5 4-2.5A2.5 2.5 0 0 1 21 12z" fill="currentColor" fill-opacity="0.2" />' +
+            '<path d="M12 21a2.5 2.5 0 0 1-2.5-2.5c0-2 2.5-4 2.5-4s2.5 2 2.5 4A2.5 2.5 0 0 1 12 21z" fill="currentColor" fill-opacity="0.2" />' +
+            '<path d="M3 12a2.5 2.5 0 0 1 2.5-2.5c2 0 4 2.5 4 2.5s-2 2.5-4 2.5A2.5 2.5 0 0 1 3 12z" fill="currentColor" fill-opacity="0.2" />' +
+            '</svg>';
+    } else if (sp.indexOf('fern') !== -1) {
+        return '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M4 20c6-1 12-7 14-16" />' +
+            '<path d="M8 17c3-3 6-3 8-1" />' +
+            '<path d="M11 14c3-3 6-3 7-1" />' +
+            '<path d="M14 10c2-2 4-2 5-1" />' +
+            '</svg>';
+    } else if (sp.indexOf('cactus') !== -1 || sp.indexOf('succulent') !== -1) {
+        return '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M8 22h8" />' +
+            '<path d="M12 2a3 3 0 0 1 3 3v17H9V5a3 3 0 0 1 3-3z" fill="currentColor" fill-opacity="0.2" />' +
+            '<path d="M6 10v3a2 2 0 0 0 2 2h1" />' +
+            '<path d="M18 8v4a2 2 0 0 1-2 2h-1" />' +
+            '</svg>';
+    } else {
+        // Default Leaf / Sprout
+        return '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M12 21c0-5 3-9 8-10-1 6-4 10-8 10z" fill="currentColor" fill-opacity="0.25" />' +
+            '<path d="M12 21c0-4-3-8-8-8 1 5 4 8 8 8z" fill="currentColor" fill-opacity="0.25" />' +
+            '<path d="M12 21V11" />' +
+            '</svg>';
+    }
+}
+
+function animateNumber(element, start, end, duration) {
+    if (!element) return;
+    if (start === end) {
+        element.innerText = end + '%';
+        return;
+    }
+    var startTime = performance.now();
+    function update(currentTime) {
+        var elapsed = currentTime - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        var current = Math.round(start + (end - start) * ease);
+        element.innerText = current + '%';
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            element.innerText = end + '%';
+        }
+    }
+    requestAnimationFrame(update);
+}
+
+function updateCardStyles(plantId) {
+    var cards = document.querySelectorAll('#plantListContainer > div');
+    cards.forEach(function (card) {
+        var pid = parseInt(card.getAttribute('data-plant-id'), 10);
+        var isActive = pid === plantId;
+        card.className = 'group p-3 rounded-2xl cursor-pointer transition-all duration-200 flex items-center justify-between border ' +
+            (isActive
+                ? 'bg-gradient-to-r from-[#EBF7F0] via-[#F4FAF6] to-white border-[#36925B] shadow-sm ring-1.5 ring-[#36925B]/25'
+                : 'bg-white/80 border-[#E2EBE5] hover:bg-white hover:border-[#BEDECD] hover:shadow-xs');
+
+        var iconBox = card.querySelector('.plant-icon-box');
+        if (iconBox) {
+            iconBox.className = 'plant-icon-box w-9 h-9 shrink-0 rounded-xl flex items-center justify-center transition-all duration-200 ' +
+                (isActive ? 'bg-[#36925B] text-white shadow-xs' : 'bg-[#EAF6EE] text-[#2C7848] group-hover:bg-[#DEEFE4]');
+        }
+
+        var title = card.querySelector('.plant-title');
+        if (title) {
+            title.className = 'plant-title text-xs sm:text-sm font-bold truncate capitalize ' +
+                (isActive ? 'text-[#143521]' : 'text-[#2D4537] group-hover:text-[#143521]');
+        }
+    });
+}
+
+function updatePlantCardBadge(plant) {
+    var card = document.querySelector('[data-plant-id="' + plant.id + '"]');
+    if (card) {
+        var badge = card.querySelector('.health-badge');
+        if (badge) {
+            var healthBadgeClass = plant.health >= 60
+                ? 'bg-[#EBF8F0] text-[#1E7D47] border border-[#CCEEDB]'
+                : (plant.health >= 30
+                    ? 'bg-[#FEF7E6] text-[#C27803] border border-[#FDE3B2]'
+                    : 'bg-[#FFF0ED] text-[#D1493E] border border-[#FECDD3]');
+            badge.className = 'health-badge shrink-0 px-2.5 py-1 text-[11px] font-extrabold rounded-xl shadow-xs ' + healthBadgeClass;
+            badge.innerText = plant.health + '%';
+        }
+    }
+}
+
+function selectPlant(plantId) {
+    if (window.activePlantId === plantId) return;
+    window.activePlantId = plantId;
+    updateCardStyles(plantId);
+
+    var active = null;
+    for (var i = 0; i < window.userPlants.length; i++) {
+        if (window.userPlants[i].id === plantId) {
+            active = window.userPlants[i];
+            break;
+        }
+    }
+    if (!active) return;
+
+    document.getElementById('activePlantName').innerText = active.name;
+    document.getElementById('activeSpeciesBadge').innerText = active.species;
+
+    var healthDisplay = document.getElementById('healthDisplay');
+    var currentDisplayVal = parseInt(healthDisplay.innerText, 10) || 0;
+    animateNumber(healthDisplay, currentDisplayVal, active.health, 400);
+
+    var healthBar = document.getElementById('healthBar');
+    if (healthBar) {
+        healthBar.style.width = active.health + '%';
+    }
+
+    document.getElementById('plantVisualStage').innerHTML = renderSpeciesVector(active.species, active.health, active.stage);
+
+    var careContainer = document.getElementById('careActionsContainer');
+    if (careContainer) {
+        if (active.stage === 4) {
+            careContainer.style.display = 'none';
+        } else {
+            careContainer.style.display = 'grid';
+        }
+    }
+}
+
 function renderUI() {
     var container = document.getElementById('plantListContainer');
     if (!container) return;
     container.innerHTML = '';
 
     if (!window.userPlants || window.userPlants.length === 0) {
-        document.getElementById('activePlantName').innerText = 'No Flora in Habitat';
+        document.getElementById('activePlantName').innerText = 'No Flora in Corner';
         document.getElementById('plantVisualStage').innerHTML = '';
         document.getElementById('healthDisplay').innerText = '0%';
         document.getElementById('healthBar').style.width = '0%';
@@ -587,23 +739,37 @@ function renderUI() {
     window.userPlants.forEach(function (plant) {
         var isActive = plant.id === window.activePlantId;
         var card = document.createElement('div');
-        card.className = 'clay-card p-3 rounded-2xl cursor-pointer transition-all duration-200 flex items-center justify-between border ' +
-            (isActive ? 'border-[#36925B] bg-gradient-to-r from-[#F0F9F4] to-[#FFFFFF] shadow-md ring-2 ring-[#36925B]/20 -translate-y-0.5' : 'border-transparent bg-white/80 hover:bg-white hover:border-[#D3E8DC] hover:shadow-sm');
+        card.setAttribute('data-plant-id', plant.id);
+        card.className = 'group p-3 rounded-2xl cursor-pointer transition-all duration-200 flex items-center justify-between border ' +
+            (isActive
+                ? 'bg-gradient-to-r from-[#EBF7F0] via-[#F4FAF6] to-white border-[#36925B] shadow-sm ring-1.5 ring-[#36925B]/25'
+                : 'bg-white/80 border-[#E2EBE5] hover:bg-white hover:border-[#BEDECD] hover:shadow-xs');
 
-        card.onclick = function () { window.activePlantId = plant.id; renderUI(); };
+        card.onclick = function () { selectPlant(plant.id); };
 
-        var healthBadgeClass = plant.health >= 60 ? 'bg-[#E5F5EC] text-[#247E49] border border-[#CDEBD8]' : (plant.health >= 30 ? 'bg-[#FEF3C7] text-[#D97706] border border-[#FDE68A]' : 'bg-[#FFF0ED] text-[#D16D65] border border-[#FECDD3]');
+        var healthBadgeClass = plant.health >= 60
+            ? 'bg-[#EBF8F0] text-[#1E7D47] border border-[#CCEEDB]'
+            : (plant.health >= 30
+                ? 'bg-[#FEF7E6] text-[#C27803] border border-[#FDE3B2]'
+                : 'bg-[#FFF0ED] text-[#D1493E] border border-[#FECDD3]');
 
-        card.innerHTML = '<div class="flex items-center gap-2.5">' +
-            '<div class="w-8 h-8 rounded-xl ' + (isActive ? 'bg-[#36925B] text-white shadow-xs' : 'bg-[#EBF7F0] text-[#2D7A46]') + ' flex items-center justify-center text-sm font-bold transition">' +
-            (plant.species && plant.species.indexOf('Bonsai') !== -1 ? '🪴' : (plant.species && plant.species.indexOf('Monstera') !== -1 ? '🌿' : (plant.species && plant.species.indexOf('Jasmine') !== -1 ? '🌸' : '🌱'))) +
+        var iconBoxClass = isActive
+            ? 'bg-[#36925B] text-white shadow-xs'
+            : 'bg-[#EAF6EE] text-[#2C7848] group-hover:bg-[#DEEFE4]';
+
+        var titleClass = isActive ? 'text-[#143521]' : 'text-[#2D4537] group-hover:text-[#143521]';
+        var iconSvg = getSpeciesThumbnailSvg(plant.species);
+
+        card.innerHTML = '<div class="flex items-center gap-3 min-w-0 pr-2">' +
+            '<div class="plant-icon-box w-9 h-9 shrink-0 rounded-xl ' + iconBoxClass + ' flex items-center justify-center transition-all duration-200">' +
+            iconSvg +
             '</div>' +
-            '<div>' +
-            '<h4 class="text-xs sm:text-sm font-bold ' + (isActive ? 'text-[#163824]' : 'text-[#2D3E33]') + '">' + (plant.name || 'Unnamed') + '</h4>' +
-            '<span class="text-[10px] text-[#71887A] font-semibold">' + (plant.species || 'Flora') + '</span>' +
+            '<div class="min-w-0">' +
+            '<h4 class="plant-title text-xs sm:text-sm font-bold ' + titleClass + ' truncate capitalize">' + (plant.name || 'Plant') + '</h4>' +
+            '<span class="text-[10.5px] text-[#6E8A79] font-semibold truncate block">' + (plant.species || 'Flora') + '</span>' +
             '</div>' +
             '</div>' +
-            '<span class="px-2.5 py-1 text-[11px] font-extrabold rounded-xl shadow-xs ' + healthBadgeClass + '">' + plant.health + '%</span>';
+            '<span class="health-badge shrink-0 px-2.5 py-1 text-[11px] font-extrabold rounded-xl shadow-xs ' + healthBadgeClass + '">' + plant.health + '%</span>';
 
         container.appendChild(card);
     });
@@ -636,9 +802,82 @@ function renderUI() {
     }
 }
 
+var isCareApplying = false;
+
 function applyCare(type) {
-    if (!window.activePlantId || window.activePlantId === -1) return;
-    window.location.href = 'plantAction.jsp?action=care&plant_id=' + window.activePlantId + '&type=' + type;
+    if (!window.activePlantId || window.activePlantId === -1 || isCareApplying) return;
+
+    var active = null;
+    for (var i = 0; i < window.userPlants.length; i++) {
+        if (window.userPlants[i].id === window.activePlantId) {
+            active = window.userPlants[i];
+            break;
+        }
+    }
+    if (!active) return;
+    if (active.health >= 100) return;
+
+    isCareApplying = true;
+
+    // Trigger visual particle effect
+    var effectLayer = type === 'water' ? document.getElementById('waterLayer') : document.getElementById('windLayer');
+    if (effectLayer) {
+        effectLayer.classList.remove('opacity-0');
+        effectLayer.classList.add('opacity-100');
+        setTimeout(function () {
+            effectLayer.classList.remove('opacity-100');
+            effectLayer.classList.add('opacity-0');
+        }, 1200);
+    }
+
+    var boost = type === 'water' ? 15 : 10;
+    var prevHp = active.health;
+    var targetHp = Math.min(100, prevHp + boost);
+    active.health = targetHp;
+
+    if (targetHp >= 100) active.stage = 4;
+    else if (targetHp >= 60) active.stage = 3;
+    else if (targetHp >= 30) active.stage = 2;
+    else active.stage = 1;
+
+    // 1. Animate health bar width ONLY from prevHp% to targetHp% (no starting from 0%)
+    var healthBar = document.getElementById('healthBar');
+    if (healthBar) {
+        healthBar.style.width = targetHp + '%';
+    }
+
+    // 2. Animate counter text count up
+    var healthDisplay = document.getElementById('healthDisplay');
+    animateNumber(healthDisplay, prevHp, targetHp, 500);
+
+    // 3. Update active card badge in list
+    updatePlantCardBadge(active);
+
+    // 4. Update visual terrarium with stage/vitality update
+    setTimeout(function () {
+        var stageContainer = document.getElementById('plantVisualStage');
+        if (stageContainer) {
+            stageContainer.innerHTML = renderSpeciesVector(active.species, active.health, active.stage);
+        }
+    }, 200);
+
+    // 5. Hide care if full stage 4
+    var careContainer = document.getElementById('careActionsContainer');
+    if (careContainer && active.stage === 4) {
+        setTimeout(function () {
+            careContainer.style.display = 'none';
+        }, 600);
+    }
+
+    // 6. Asynchronous persistence call to database
+    fetch('plantAction.jsp?action=care&plant_id=' + window.activePlantId + '&type=' + encodeURIComponent(type))
+        .then(function () {
+            isCareApplying = false;
+        })
+        .catch(function (err) {
+            console.error('Care persistence error:', err);
+            isCareApplying = false;
+        });
 }
 
 function savePlant(e) {
@@ -676,7 +915,7 @@ function saveName(e) {
 
 function deletePlant() {
     if (!window.userPlants || window.userPlants.length <= 1) {
-        alert("You must keep at least one plant in your habitat!");
+        alert("You must keep at least one plant in your corner!");
         return;
     }
     if (confirm("Are you sure you want to remove this plant?")) {
