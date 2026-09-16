@@ -395,47 +395,59 @@
 
                     <!-- Modals -->
                     <div id="addModal"
-                        class="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-                        <div class="clay-card max-w-sm w-full p-6 text-left shadow-2xl">
-                            <h3 class="text-xl font-bold font-['Quicksand'] text-[#163824] mb-1">Adopt New Flora</h3>
-                            <p class="text-xs text-[#638472] mb-5">Choose from available catalog species and nickname
-                                your plant.</p>
+                        class="fixed inset-0 bg-slate-900/30 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 transition-all duration-300">
+                        <div class="frosted-glass-modal max-w-sm w-full p-6 sm:p-7 text-left shadow-2xl relative">
+                            <h3 class="text-xl font-bold font-['Quicksand'] text-[#163824] mb-1">Adopt New Sprout</h3>
+                            <p class="text-xs text-[#638472] mb-5 font-medium">Choose a species and give your new plant
+                                companion a nickname.</p>
                             <form onsubmit="savePlant(event)">
                                 <label class="block text-xs font-bold text-[#4B6F57] mb-1.5">Nickname</label>
                                 <input type="text" id="addNickname" required placeholder="e.g., Greenie"
-                                    class="clay-input w-full rounded-xl px-4 py-2.5 text-sm mb-4 outline-none">
-                                <label class="block text-xs font-bold text-[#4B6F57] mb-1.5">Select Species (Oracle
-                                    Catalog)</label>
-                                <select id="addSpecies"
-                                    class="clay-input w-full rounded-xl px-4 py-2.5 text-sm mb-6 outline-none text-[#163824] font-medium">
-                                    <% for (String sp : speciesCatalog) { %>
-                                        <option value="<%= sp %>">🌿 <%= sp %>
-                                        </option>
-                                        <% } %>
-                                </select>
+                                    class="frosted-input w-full rounded-2xl px-4 py-2.5 text-sm mb-4 outline-none font-medium text-[#163824]">
+
+                                <label class="block text-xs font-bold text-[#4B6F57] mb-1.5">Select Species</label>
+                                <div class="relative mb-6">
+                                    <select id="addSpecies"
+                                        class="frosted-input w-full rounded-2xl px-4 py-2.5 text-sm outline-none text-[#163824] font-semibold appearance-none pr-10 cursor-pointer">
+                                        <% for (String sp : speciesCatalog) { %>
+                                            <option value="<%= sp %>">
+                                                <%= sp %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                    <div
+                                        class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-[#4A7259]">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
+                                </div>
                                 <div class="flex gap-3">
                                     <button type="button" onclick="closeModal('addModal')"
-                                        class="w-1/2 py-2.5 bg-gray-100 hover:bg-gray-200 rounded-xl text-xs font-bold text-gray-600 transition">Cancel</button>
+                                        class="w-1/2 py-2.5 bg-white/70 hover:bg-white border border-[#DCE8E0] rounded-2xl text-xs font-bold text-[#557563] transition shadow-xs">Cancel</button>
                                     <button type="submit"
-                                        class="w-1/2 py-2.5 bg-[#36925B] hover:bg-[#2B7A4B] text-white rounded-xl text-xs font-bold shadow-md transition">Adopt</button>
+                                        class="clay-button w-1/2 py-2.5 bg-[#36925B] hover:bg-[#2B7A4B] text-white rounded-2xl text-xs font-bold shadow-md transition">Adopt</button>
                                 </div>
                             </form>
                         </div>
                     </div>
 
                     <div id="editModal"
-                        class="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-                        <div class="clay-card max-w-sm w-full p-6 text-left shadow-2xl">
+                        class="fixed inset-0 bg-slate-900/30 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 transition-all duration-300">
+                        <div class="frosted-glass-modal max-w-sm w-full p-6 sm:p-7 text-left shadow-2xl relative">
                             <h3 class="text-xl font-bold font-['Quicksand'] text-[#163824] mb-1">Rename Plant</h3>
-                            <p class="text-xs text-[#638472] mb-4">Give your plant companion a new nickname.</p>
+                            <p class="text-xs text-[#638472] mb-5 font-medium">Give your plant companion a new nickname.
+                            </p>
                             <form onsubmit="saveName(event)">
+                                <label class="block text-xs font-bold text-[#4B6F57] mb-1.5">New Nickname</label>
                                 <input type="text" id="editNickname" required
-                                    class="clay-input w-full rounded-xl px-4 py-2.5 text-sm mb-5 outline-none">
+                                    class="frosted-input w-full rounded-2xl px-4 py-2.5 text-sm mb-6 outline-none font-medium text-[#163824]">
                                 <div class="flex gap-3">
                                     <button type="button" onclick="closeModal('editModal')"
-                                        class="w-1/2 py-2.5 bg-gray-100 hover:bg-gray-200 rounded-xl text-xs font-bold text-gray-600 transition">Cancel</button>
+                                        class="w-1/2 py-2.5 bg-white/70 hover:bg-white border border-[#DCE8E0] rounded-2xl text-xs font-bold text-[#557563] transition shadow-xs">Cancel</button>
                                     <button type="submit"
-                                        class="w-1/2 py-2.5 bg-[#36925B] hover:bg-[#2B7A4B] text-white rounded-xl text-xs font-bold shadow-md transition">Save</button>
+                                        class="clay-button w-1/2 py-2.5 bg-[#36925B] hover:bg-[#2B7A4B] text-white rounded-2xl text-xs font-bold shadow-md transition">Save</button>
                                 </div>
                             </form>
                         </div>

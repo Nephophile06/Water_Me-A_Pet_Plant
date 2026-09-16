@@ -648,8 +648,8 @@ function updateCardStyles(plantId) {
         var isActive = pid === plantId;
         card.className = 'group p-3 rounded-2xl cursor-pointer transition-all duration-200 flex items-center justify-between border ' +
             (isActive
-                ? 'bg-gradient-to-r from-[#EBF7F0] via-[#F4FAF6] to-white border-[#36925B] shadow-sm ring-1.5 ring-[#36925B]/25'
-                : 'bg-white/80 border-[#E2EBE5] hover:bg-white hover:border-[#BEDECD] hover:shadow-xs');
+                ? 'bg-gradient-to-r from-[#EFF8F3] via-[#F7FCF9] to-white border-[#36925B] shadow-xs'
+                : 'bg-white/80 border-[#E4ECE7] hover:bg-white hover:border-[#BFDFCE] hover:shadow-xs');
 
         var iconBox = card.querySelector('.plant-icon-box');
         if (iconBox) {
@@ -742,8 +742,8 @@ function renderUI() {
         card.setAttribute('data-plant-id', plant.id);
         card.className = 'group p-3 rounded-2xl cursor-pointer transition-all duration-200 flex items-center justify-between border ' +
             (isActive
-                ? 'bg-gradient-to-r from-[#EBF7F0] via-[#F4FAF6] to-white border-[#36925B] shadow-sm ring-1.5 ring-[#36925B]/25'
-                : 'bg-white/80 border-[#E2EBE5] hover:bg-white hover:border-[#BEDECD] hover:shadow-xs');
+                ? 'bg-gradient-to-r from-[#EFF8F3] via-[#F7FCF9] to-white border-[#36925B] shadow-xs'
+                : 'bg-white/80 border-[#E4ECE7] hover:bg-white hover:border-[#BFDFCE] hover:shadow-xs');
 
         card.onclick = function () { selectPlant(plant.id); };
 
